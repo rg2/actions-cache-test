@@ -28,6 +28,7 @@ jobs:
           cmake -S fmt_repo_path -B fmt_repo_path\build -DCMAKE_INSTALL_PREFIX="%INSTALL_ROOT%" -DFMT_TEST:BOOL=OFF
           cmake --build fmt_repo_path\build --config Debug
           cmake --install fmt_repo_path\build --config Debug
+        shell: cmd
 #      - name: Cache proj1 build
 #        id: proj1-build
 #        uses: actions/cache@v3
