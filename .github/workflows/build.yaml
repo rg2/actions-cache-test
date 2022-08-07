@@ -43,6 +43,8 @@ jobs:
         shell: cmd
       - name: Build proj2
         run: |
+          SET "INSTALL_ROOT=%~d0\usr\local"
+          ECHO INSTALL_ROOT = %INSTALL_ROOT%
           cmake -S my_repo_path\proj2 -B my_repo_path\proj2\build -DCMAKE_PREFIX_PATH:PATH="%INSTALL_ROOT%"
           cmake --build my_repo_path\proj2\build --config Debug
         shell: cmd
