@@ -29,9 +29,9 @@ jobs:
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
           cmake --build build
         shell: cmd
-#      -name: Build proj2
-#        run: |
-#          cd ..\proj2
-#          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-#          cmake --build build
-#        shell: cmd
+      - name: Build proj2
+        run: |
+          cd ..\proj2
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+        shell: cmd
