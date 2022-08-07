@@ -29,17 +29,17 @@ jobs:
 #          key: ${{ runner.os }}-proj1-build
       - name: Build fmt
         run: |
-          cmake -S fmt_repo_path -B fmt_repo_path\build -DCMAKE_BUILD_TYPE=Release
-          cmake --build fmt_repo_path\build
-          cmake --install fmt_repo_path\build
+          cmake -S fmt_repo_path -B fmt_repo_path\build -DCMAKE_INSTALL_PREFIX="%~d0\usr\local"
+          cmake --build fmt_repo_path\build --config Debug
+          cmake --install fmt_repo_path\build --config Debug
       - name: Build proj1
 #        if: steps.proj1-build.outputs.cache-hit != 'true'
         run: |
-          cmake -S my_repo_path\proj1 -B my_repo_path\proj1\build -DCMAKE_BUILD_TYPE=Release
-          cmake --build my_repo_path\proj1\build
+          cmake -S my_repo_path\proj1 -B my_repo_path\proj1\build
+          cmake --build my_repo_path\proj1\build --config Debug
         shell: cmd
       - name: Build proj2
         run: |
-          cmake -S my_repo_path\proj2 -B my_repo_path\proj2\build -DCMAKE_BUILD_TYPE=Release
-          cmake --build my_repo_path\proj2\build
+          cmake -S my_repo_path\proj2 -B my_repo_path\proj2\build
+          cmake --build my_repo_path\proj2\build --config Debug
         shell: cmd
