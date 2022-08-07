@@ -1,7 +1,3 @@
-# GitHub action to build software.
-# Linux builds include pre-built dependencies via containers.
-# The Windows and MacOS builds build dependencies each run.
-
 name: Build
 on:
   pull_request:
