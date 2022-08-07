@@ -23,7 +23,9 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.12
       - name: Build fmt
         run: |
-          cmake -S fmt_repo_path -B fmt_repo_path\build -DCMAKE_INSTALL_PREFIX="%~d0\usr\local" -DFMT_TEST:BOOL=OFF
+          SET "INSTALL_ROOT=%~d0\usr\local"
+          ECHO INSTALL_ROOT = %INSTALL_ROOT%
+          cmake -S fmt_repo_path -B fmt_repo_path\build -DCMAKE_INSTALL_PREFIX="%INSTALL_ROOT%" -DFMT_TEST:BOOL=OFF
           cmake --build fmt_repo_path\build --config Debug
           cmake --install fmt_repo_path\build --config Debug
 #      - name: Cache proj1 build
@@ -40,6 +42,6 @@ jobs:
         shell: cmd
       - name: Build proj2
         run: |
-          cmake -S my_repo_path\proj2 -B my_repo_path\proj2\build -DCMAKE_PREFIX_PATH:PATH="%~d0\usr\local"
+          cmake -S my_repo_path\proj2 -B my_repo_path\proj2\build -DCMAKE_PREFIX_PATH:PATH="%INSTALL_ROOT%"
           cmake --build my_repo_path\proj2\build --config Debug
         shell: cmd
