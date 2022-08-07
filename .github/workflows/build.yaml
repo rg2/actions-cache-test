@@ -25,13 +25,11 @@ jobs:
       - name: Build proj1
         if: steps.proj1-build.outputs.cache-hit != 'true'
         run: |
-          cd my_repo_path\proj1
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-          cmake --build build
+          cmake -S my_repo_path\proj1 -B my_repo_path\proj1\build -DCMAKE_BUILD_TYPE=Release
+          cmake --build my_repo_path\proj1\build
         shell: cmd
       - name: Build proj2
         run: |
-          cd ..\proj2
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-          cmake --build build
+          cmake -S my_repo_path\proj2 -B my_repo_path\proj2\build -DCMAKE_BUILD_TYPE=Release
+          cmake --build my_repo_path\proj2\build
         shell: cmd
