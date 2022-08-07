@@ -16,14 +16,14 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.12
-      - name: Cache proj1 build
-        id: proj1-build
-        uses: actions/cache@v3
-        with:
-          path: my_repo_path\proj1\build
-          key: ${{ runner.os }}-proj1-build
+#      - name: Cache proj1 build
+#        id: proj1-build
+#        uses: actions/cache@v3
+#        with:
+#          path: my_repo_path\proj1\build
+#          key: ${{ runner.os }}-proj1-build
       - name: Build proj1
-        if: steps.proj1-build.outputs.cache-hit != 'true'
+#        if: steps.proj1-build.outputs.cache-hit != 'true'
         run: |
           cmake -S my_repo_path\proj1 -B my_repo_path\proj1\build -DCMAKE_BUILD_TYPE=Release
           cmake --build my_repo_path\proj1\build
