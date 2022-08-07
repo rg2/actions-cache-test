@@ -1,0 +1,42 @@
+# GitHub action to build software.
+# Linux builds include pre-built dependencies via containers.
+# The Windows and MacOS builds build dependencies each run.
+
+name: Build
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+
+jobs:
+  windows_build:
+    runs-on: windows-2019
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v2
+        with:
+          path: my_repo_path
+      - name: Setup Visual C++ environment
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.12
+      - name: Cache proj1 build
+        id: proj1-build
+        uses: actions/cache@v3
+        with:
+          path: my_repo_path\proj1\build
+          key: ${{ runner.os }}-proj1-build
+      - name: Build proj1
+        if: steps.proj1-build.outputs.cache-hit != 'true'
+        run: |
+          cd my_repo_path\proj1
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+        shell: cmd
+      -name: Build proj2
+        run: |
+          cd ..\proj2
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+        shell: cmd
