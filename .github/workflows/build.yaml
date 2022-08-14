@@ -22,17 +22,13 @@ jobs:
         with:
           repository: stevengj/nlopt
           path: nlopt_repo_path
-      - name: copy nlopt to tmp
-        run: |
-          mkdir D:\tmp
-          xcopy /si nlopt_repo_path D:\tmp\nlopt
         shell: cmd
       - name: Setup Visual C++ environment
         uses: ilammy/msvc-dev-cmd@v1
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.12
       - name: Cache usr/local
-        id: usr-local-cache
+        id: usr-local-cache2
         uses: actions/cache@v3
         with:
           path: |
@@ -42,8 +38,13 @@ jobs:
       - name: List contents of tmp/nlopt
         run: dir D:\tmp\nlopt
         shell: cmd
+      - name: copy nlopt to tmp
+        if: steps.usr-local-cache2.outputs.cache-hit != 'true'
+        run: |
+          mkdir D:\tmp
+          xcopy /si nlopt_repo_path D:\tmp\nlopt
       - name: Build fmt
-        if: steps.usr-local-cache.outputs.cache-hit != 'true'
+        if: steps.usr-local-cache2.outputs.cache-hit != 'true'
         run: |
           SET "INSTALL_ROOT=%~d0\usr\local"
           ECHO INSTALL_ROOT = %INSTALL_ROOT%
