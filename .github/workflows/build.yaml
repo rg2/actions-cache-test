@@ -25,7 +25,7 @@ jobs:
       - name: copy nlopt to tmp
         run: |
           mkdir D:\tmp
-          xcopy nlopt_repo_path D:\tmp\nlopt
+          xcopy /si nlopt_repo_path D:\tmp\nlopt
         shell: cmd
       - name: Setup Visual C++ environment
         uses: ilammy/msvc-dev-cmd@v1
