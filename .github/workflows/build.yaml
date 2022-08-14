@@ -17,6 +17,16 @@ jobs:
         with:
           repository: fmtlib/fmt
           path: fmt_repo_path
+      - name: Checkout nlopt
+        uses: actions/checkout@v2
+        with:
+          repository: stevengj/nlopt
+          path: nlopt_repo_path
+      - name: copy nlopt to tmp
+        run: |
+          mkdir D:\tmp
+          xcopy nlopt_repo_path D:\tmp\nlopt
+        shell: cmd
       - name: Setup Visual C++ environment
         uses: ilammy/msvc-dev-cmd@v1
       - name: Setup cmake
@@ -25,7 +35,9 @@ jobs:
         id: usr-local-cache
         uses: actions/cache@v3
         with:
-          path: D:\usr\local
+          path: |
+            D:\usr\local
+            D:\tmp\nlopt
           key: ${{ runner.os }}-usr-local
       - name: Build fmt
         if: steps.usr-local-cache.outputs.cache-hit != 'true'
