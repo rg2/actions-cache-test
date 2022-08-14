@@ -22,7 +22,6 @@ jobs:
         with:
           repository: stevengj/nlopt
           path: nlopt_repo_path
-        shell: cmd
       - name: Setup Visual C++ environment
         uses: ilammy/msvc-dev-cmd@v1
       - name: Setup cmake
@@ -43,6 +42,7 @@ jobs:
         run: |
           mkdir D:\tmp
           xcopy /si nlopt_repo_path D:\tmp\nlopt
+        shell: cmd
       - name: Build fmt
         if: steps.usr-local-cache2.outputs.cache-hit != 'true'
         run: |
