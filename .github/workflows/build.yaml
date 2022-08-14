@@ -34,8 +34,11 @@ jobs:
             D:\usr\local
             D:\tmp\nlopt
           key: ${{ runner.os }}-usr-local2
-      - name: List contents of tmp/nlopt
-        run: dir D:\tmp\nlopt
+      - name: List contents of tmp/nlopt, usr/local
+        if: steps.usr-local-cache2.outputs.cache-hit == 'true'
+        run: |
+          dir D:\usr\local
+          dir D:\tmp\nlopt
         shell: cmd
       - name: copy nlopt to tmp
         if: steps.usr-local-cache2.outputs.cache-hit != 'true'
