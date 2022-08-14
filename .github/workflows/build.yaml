@@ -39,6 +39,9 @@ jobs:
             D:\usr\local
             D:\tmp\nlopt
           key: ${{ runner.os }}-usr-local
+      - name: List contents of tmp/nlopt
+        run: dir D:\tmp\nlopt
+        shell: cmd
       - name: Build fmt
         if: steps.usr-local-cache.outputs.cache-hit != 'true'
         run: |
