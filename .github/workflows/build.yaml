@@ -33,7 +33,7 @@ jobs:
           path: |
             D:\usr\local
             D:\tmp\nlopt
-          key: ${{ runner.os }}-usr-local
+          key: ${{ runner.os }}-usr-local2
       - name: List contents of tmp/nlopt
         run: dir D:\tmp\nlopt
         shell: cmd
